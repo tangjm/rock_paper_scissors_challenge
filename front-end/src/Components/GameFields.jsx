@@ -1,72 +1,52 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const GameFields = ({ setGameResult, submitData }) => {
-	const [playerName, setPlayerName] = useState(``);
+const GameFields = ({ playerName, submitData }) => {
 
-	const nameField = "Please input your name";
 	const optionField = "Rock, Paper or Scissors?";
-	const possibleOptions = ["rock", "paper", "scissors"];
+	const gameOptions = ["rock", "paper", "scissors"];
 
-	const submitHandler = event => {
+	const submitChoicesHandler = event => {
 		event.preventDefault();
 		const chosenOption = document.querySelector("input[name='options']:checked").value;
-		setGameResult(submitData(playerName, chosenOption));
-		setPlayerName(``);
+		submitData(playerName, chosenOption);
 	}
 
 	return (
-		<form onSubmit={submitHandler}>
-			<div>
-				<h3>{nameField}</h3>
-				<label htmlFor="name">{nameField}</label>
-				<input
-					className="App-link"
-					id="name"
-					value={playerName}
-					placeholder="Name"
-					onChange={event => setPlayerName(event.target.value)}
-					required
-				/>
-			</div>
+		<form onSubmit={submitChoicesHandler}>
 			<h3>{optionField}</h3>
-			<div>
+			<div display="flex" flex-direction="column">
+				<label htmlFor={gameOptions[0]}>{gameOptions[0]}</label>
 				<input
 					type="radio"
-					id={possibleOptions[0]}
+					id={gameOptions[0]}
 					name="options"
-					value={possibleOptions[0]}
+					value={gameOptions[0]}
 					required
 				/>
-				<label htmlFor={possibleOptions[0]}>{possibleOptions[0]}</label>
-
+				<label htmlFor={gameOptions[1]}>{gameOptions[1]}</label>
 				<input
 					type="radio"
-					id={possibleOptions[1]}
+					id={gameOptions[1]}
 					name="options"
-					value={possibleOptions[1]}
+					value={gameOptions[1]}
 					required
 				/>
-				<label htmlFor={possibleOptions[1]}>{possibleOptions[1]}</label>
-
+				<label htmlFor={gameOptions[2]}>{gameOptions[2]}</label>
 				<input
 					type="radio"
-					id={possibleOptions[2]}
+					id={gameOptions[2]}
 					name="options"
-					value={possibleOptions[2]}
+					value={gameOptions[2]}
 					required
 				/>
-				<label htmlFor={possibleOptions[2]}>{possibleOptions[2]}</label>
 			</div>
-			<div>
-				<input type="submit" className="App-link" value="Submit" />
-			</div>
+			<input type="submit" className="App-link" value="Submit" />
 		</form>
 	)
 }
 
 GameFields.propTypes = {
-	setGameResult: PropTypes.func,
+	playerName: PropTypes.string,
 	submitData: PropTypes.func
 }
 export default GameFields;
