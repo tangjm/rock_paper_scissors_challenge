@@ -3,31 +3,29 @@ const express = require('express');
 const router = express.Router();
 
 function computerChooses() {
-	const options = ["Rock", "Paper", "Scissors"];
+	const options = ["rock", "paper", "scissors"];
 	const randomNum = Math.round(Math.random() * 2);
 	const cpuChoice = options[randomNum];
-	return cpuChoice;
+	return { name: "CPU", choice: cpuChoice };
 }
 
 function determineWinner(a, b) {
-	const aWins = `${a} wins`;
-	const bWins = `${b} wins`;
-	const outcome = "";
+	({ name: aName, choice: aChoice } = a);
+	({ name: bName, choice: bChoice } = b);
 
-	if (a === b) outcome = "draw";
-	else if (a === "rock" && b === "scissors") outcome = aWins;
-	else if (a === "scissors" && b === "paper") outcome = aWins;
-	else if (a === "paper" && b === "rock") outcome = aWins;
-	else outcome = bWins;
-
-	return outcome;
+	if (aChoice === bChoice) return "draw";
+	else if (aChoice === "rock" && bChoice === "scissors") return aName;
+	else if (aChoice === "scissors" && bChoice === "paper") return aName;
+	else if (aChoice === "paper" && bChoice === "rock") return aName;
+	else return bName;
 }
 
 router.route(`/`)
 	.post((req, res) => {
-		console.dir(req.body);
-		const userSelections = req.body;
-		res.end("Welcome");
+		const userData = req.body;
+		const result = determineWinner(computerChooses(), userData);
+		console.log(result);
+		res.json({ result: result });
 	})
 
 
