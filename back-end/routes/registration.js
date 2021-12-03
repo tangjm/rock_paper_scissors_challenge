@@ -11,8 +11,8 @@ router.route(`/`)
 
 			rpcGame.registerPlayers(player1Name, player2Name);
 
-			req.app.locals.data = { game: rpcGame };
-
+			req.app.locals.game = rpcGame;
+			req.app.set("game", rpcGame);
 			return res.status(200).json("Sucessfully registered players");
 		}
 		return res.status(404).send("Failed to register player name");

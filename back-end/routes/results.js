@@ -4,8 +4,8 @@ const router = express.Router();
 
 router.route(`/`)
 	.post((req, res) => {
-		const game = req.app.locals.game;
-		const players = game.getPlayers();
+		let game = req.app.locals.game;
+		let players = game.getPlayers();
 
 		const result = game.determineWinner(players[0], players[1]);
 

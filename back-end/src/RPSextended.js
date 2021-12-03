@@ -28,8 +28,8 @@ class RPSextended extends RPS {
 	}
 
 	determineWinner(a, b) {
-		aChoice = this.options.indexOf(a.getChoice());
-		bChoice = this.options.indexOf(b.getChoice());
+		const aChoice = this.options.indexOf(a.getChoice()) + 1;
+		const bChoice = this.options.indexOf(b.getChoice()) + 1;
 
 		if (aChoice === bChoice) {
 			return "draw";

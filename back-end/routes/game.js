@@ -5,30 +5,27 @@ const router = express.Router();
 router.route(`/`)
 	.post((req, res) => {
 		if (req.body) {
+
 			const { player, choice } = req.body;
+			// let game = req.app.get("game");
 
-			const game = req.app.locals.data.game;
-
-			const index = game.getPlayers().indexOf(player);
-			// if (index !== -1) {
+			// let players = game.getPlayers();
+			// for (let i = 0; i < players.length; i++) {
+			// 	if (players[i].name == player) {
+			// 		players[i].setChoice(choice);
+			// 	}
 			// }
-			const players = game.getPlayers();
-			console.log(players)
-			const playerToUpdate = players[index];
-			console.log(playerToUpdate);
-			console.log(playerToUpdate.name);
-			// playerToUpdate.set
 
-			// new Player(player,);
-
-
-
-
-			if (index === game.getPlayers().length - 1) {
-				return res
-					.status(200)
-					.json(`${player}'s choice received successfully`)
-					.redirect(307, '/results');
+			let game = req.app.locals.game;
+			let players = game.getPlayers();
+			for (let i = 0; i < players.length; i++) {
+				if (players[i].name === player && i === players.length - 1) {
+					players[i].setChoice(choice);
+					return res.redirect(307, '/results');
+				}
+				if (players[i].name === player && i !== players.length - 1) {
+					players[i].setChoice(choice);
+				}
 			}
 
 			return res.status(200).json(`${player}'s choice received successfully`);
