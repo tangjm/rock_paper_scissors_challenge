@@ -7,7 +7,9 @@ import GameFields from './Components/GameFields';
 import ResultsPage from './Components/ResultsPage';
 
 function App() {
-  const [playerName, setPlayerName] = useState(``);
+  const [playerTurn, setPlayerTurn] = useState(0);
+  const [player1Name, setPlayer1Name] = useState(``);
+  const [player2Name, setPlayer2Name] = useState(``);
   const [gameResult, setGameResult] = useState({});
   const [renderGameFields, setRenderGameFields] = useState(false);
 
@@ -16,21 +18,27 @@ function App() {
   const submitData = async (playerName, chosenOption) => {
     try {
       const res = await axios.post(
-        `${nodeServer}/finalised`,
-        { name: playerName, choice: chosenOption }
+        `${nodeServer}/game`,
+        { player: playerName, choice: chosenOption }
       );
-      setGameResult(res.data);
+      if (res.data && playerTurn) {
+        setGameResult(res.data);
+      }
+      if (res.data && !playerTurn) {
+        setPlayerTurn(1);
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
-  const submitPlayerName = async playerName => {
+  const submitPlayerNames = async (player1Name, player2Name) => {
     try {
-      const res = await axios.post(`${nodeServer}/`, { name: playerName });
-      // no need to set playerName as we set it before making the POST request
-      // then render the GamesFields page
-      if (res.data?.playerName) {
+      const res = await axios.post(`${nodeServer}/`, {
+        player1Name,
+        player2Name
+      });
+      if (res.data) {
         setRenderGameFields(true);
       }
     } catch (err) {
@@ -43,7 +51,7 @@ function App() {
       <div className="App-header">
         {
           gameResult?.result ? <ResultsPage gameResult={gameResult.result} setGameResult={setGameResult} setRenderGameFields={setRenderGameFields} /> :
-            <GameFields playerName={playerName} setGameResult={setGameResult}
+            <GameFields playerName={!playerTurn ? player1Name : player2Name} setPlayerTurn={setPlayerTurn} setGameResult={setGameResult}
               submitData={submitData} />
         }
       </div >
@@ -52,7 +60,7 @@ function App() {
 
   return (
     <div className="App-header">
-      <WelcomePage playerName={playerName} setPlayerName={setPlayerName} submitPlayerName={submitPlayerName} />
+      <WelcomePage player1Name={player1Name} player2Name={player2Name} setPlayer1Name={setPlayer1Name} setPlayer2Name={setPlayer2Name} submitPlayerNames={submitPlayerNames} />
     </div >
   );
 }

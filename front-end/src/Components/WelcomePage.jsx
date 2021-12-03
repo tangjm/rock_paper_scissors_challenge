@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 
-const WelcomePage = ({ playerName, setPlayerName, submitPlayerName }) => {
+const WelcomePage = ({ player1Name, player2Name, setPlayer1Name, setPlayer2Name, submitPlayerNames }) => {
 
 	const nameField = "Please input your name";
 	const handleSubmitName = event => {
 		event.preventDefault();
-		submitPlayerName(playerName);
-		setPlayerName(``);
+		submitPlayerNames(player1Name, player2Name);
+		// setPlayer1Name(``);
+		// setPlayer2Name(``);
 	}
 	return (
 		<form onSubmit={handleSubmitName}>
@@ -14,9 +15,17 @@ const WelcomePage = ({ playerName, setPlayerName, submitPlayerName }) => {
 			<input
 				className="App-link"
 				id="name"
-				value={playerName}
+				value={player1Name}
 				placeholder="Name"
-				onChange={event => setPlayerName(event.target.value)}
+				onChange={event => setPlayer1Name(event.target.value)}
+				required
+			/>&nbsp;
+			<input
+				className="App-link"
+				id="name"
+				value={player2Name}
+				placeholder="Name"
+				onChange={event => setPlayer2Name(event.target.value)}
 				required
 			/>&nbsp;
 			<input type="submit" value="Submit" />
@@ -26,8 +35,10 @@ const WelcomePage = ({ playerName, setPlayerName, submitPlayerName }) => {
 
 WelcomePage.propTypes = {
 	playerName: PropTypes.string,
-	setPlayerName: PropTypes.func,
-	submitPlayerName: PropTypes.func
+	player2Name: PropTypes.string,
+	setPlayer1Name: PropTypes.func,
+	setPlayer2Name: PropTypes.func,
+	submitPlayerName: PropTypes.func,
 }
 
 export default WelcomePage;

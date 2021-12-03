@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 
-const GameFields = ({ playerName, submitData }) => {
+const GameFields = ({ playerName, submitData, setPlayerTurn }) => {
 
-	const optionField = "Rock, Paper or Scissors?";
-	const gameOptions = ["rock", "paper", "scissors"];
+	const optionsTitle = "Rock, Paper or Scissors?";
+	const gameOptions = ["rock", "paper", "scissors", "spock", "lizard"];
 
 	const submitChoicesHandler = event => {
 		event.preventDefault();
@@ -13,7 +13,8 @@ const GameFields = ({ playerName, submitData }) => {
 
 	return (
 		<form onSubmit={submitChoicesHandler}>
-			<h3>{optionField}</h3>
+			<h3>{playerName}'s turn to play</h3>
+			<h3>{optionsTitle}</h3>
 			<div display="flex" flex-direction="column">
 				<label htmlFor={gameOptions[0]}>{gameOptions[0]}</label>
 				<input
@@ -39,6 +40,22 @@ const GameFields = ({ playerName, submitData }) => {
 					value={gameOptions[2]}
 					required
 				/>
+				<label htmlFor={gameOptions[3]}>{gameOptions[3]}</label>
+				<input
+					type="radio"
+					id={gameOptions[3]}
+					name="options"
+					value={gameOptions[3]}
+					required
+				/>
+				<label htmlFor={gameOptions[4]}>{gameOptions[4]}</label>
+				<input
+					type="radio"
+					id={gameOptions[4]}
+					name="options"
+					value={gameOptions[4]}
+					required
+				/>
 			</div>
 			<input type="submit" className="App-link" value="Submit" />
 		</form>
@@ -47,6 +64,7 @@ const GameFields = ({ playerName, submitData }) => {
 
 GameFields.propTypes = {
 	playerName: PropTypes.string,
-	submitData: PropTypes.func
+	submitData: PropTypes.func,
+	setPlayerTurn: PropTypes.func
 }
 export default GameFields;
