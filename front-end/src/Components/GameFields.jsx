@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const GameFields = ({ playerName, submitData, setPlayerTurn }) => {
+const GameFields = ({ playerName, submitData }) => {
 
 	const optionsTitle = "Rock, Paper or Scissors?";
 	const gameOptions = ["rock", "paper", "scissors", "spock", "lizard"];
@@ -65,6 +65,5 @@ const GameFields = ({ playerName, submitData, setPlayerTurn }) => {
 GameFields.propTypes = {
 	playerName: PropTypes.string,
 	submitData: PropTypes.func,
-	setPlayerTurn: PropTypes.func
 }
 export default GameFields;

@@ -50,9 +50,14 @@ function App() {
     return (
       <div className="App-header">
         {
-          gameResult?.result ? <ResultsPage gameResult={gameResult.result} setGameResult={setGameResult} setRenderGameFields={setRenderGameFields} /> :
-            <GameFields playerName={!playerTurn ? player1Name : player2Name} setPlayerTurn={setPlayerTurn} setGameResult={setGameResult}
-              submitData={submitData} />
+          gameResult?.result ?
+            <ResultsPage gameResult={gameResult.result}
+              setGameResult={setGameResult}
+              setRenderGameFields={setRenderGameFields}
+              setPlayerTurn={setPlayerTurn}
+              setPlayer1Name={setPlayer1Name}
+              setPlayer2Name={setPlayer2Name} /> :
+            <GameFields playerName={!playerTurn ? player1Name : player2Name} submitData={submitData} />
         }
       </div >
     )
@@ -60,7 +65,11 @@ function App() {
 
   return (
     <div className="App-header">
-      <WelcomePage player1Name={player1Name} player2Name={player2Name} setPlayer1Name={setPlayer1Name} setPlayer2Name={setPlayer2Name} submitPlayerNames={submitPlayerNames} />
+      <WelcomePage player1Name={player1Name}
+        player2Name={player2Name}
+        setPlayer1Name={setPlayer1Name}
+        setPlayer2Name={setPlayer2Name}
+        submitPlayerNames={submitPlayerNames} />
     </div >
   );
 }
