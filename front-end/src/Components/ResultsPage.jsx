@@ -33,7 +33,8 @@ ResultsPage.propTypes = {
 	setRenderGameFields: PropTypes.func,
 	setPlayerTurn: PropTypes.func,
 	setPlayer1Name: PropTypes.func,
-	setPlayer2Name: PropTypes.func
+	setPlayer2Name: PropTypes.func,
+	toTitleCase: PropTypes.func
 }
 
 export default ResultsPage;
