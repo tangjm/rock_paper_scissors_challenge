@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 
-const ResultsPage = ({ gameResult, setGameResult, setRenderGameFields, setPlayerTurn, setPlayer1Name, setPlayer2Name }) => {
+const ResultsPage = ({ gameResult, setGameResult, setRenderGameFields, setPlayerTurn, setPlayer1Name, setPlayer2Name, toTitleCase }) => {
 	const pageContent = () => {
 		if (gameResult === "draw") {
 			return <h1>Not bad, a draw!</h1>
 		}
-		return <h1>Winner: {gameResult}</h1>
+		return <h1>Winner: {toTitleCase(gameResult)}</h1>
 	}
 
 	const gameFinishedHandler = event => {

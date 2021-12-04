@@ -46,6 +46,10 @@ function App() {
     }
   };
 
+  const toTitleCase = string => {
+    return string[0].toUpperCase().concat(string.slice(1));
+  }
+
   if (renderGameFields) {
     return (
       <div className="App-header">
@@ -56,8 +60,9 @@ function App() {
               setRenderGameFields={setRenderGameFields}
               setPlayerTurn={setPlayerTurn}
               setPlayer1Name={setPlayer1Name}
-              setPlayer2Name={setPlayer2Name} /> :
-            <GameFields playerName={!playerTurn ? player1Name : player2Name} submitData={submitData} />
+              setPlayer2Name={setPlayer2Name}
+              toTitleCase={toTitleCase} /> :
+            <GameFields playerName={!playerTurn ? player1Name : player2Name} submitData={submitData} toTitleCase={toTitleCase} />
         }
       </div >
     )

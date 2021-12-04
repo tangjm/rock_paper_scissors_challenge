@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const GameFields = ({ playerName, submitData }) => {
+const GameFields = ({ playerName, submitData, toTitleCase }) => {
 
 	const formatTitle = gameOptionsArr => {
 		let formattedTitle = "";
@@ -18,9 +18,7 @@ const GameFields = ({ playerName, submitData }) => {
 		submitData(playerName, chosenOption);
 	}
 
-	const toTitleCase = string => {
-		return string[0].toUpperCase().concat(string.slice(1));
-	}
+
 
 	const populateGameOptions = gameOptions => {
 		return gameOptions.map((gameOption, index) => {
@@ -50,6 +48,7 @@ const GameFields = ({ playerName, submitData }) => {
 GameFields.propTypes = {
 	playerName: PropTypes.string,
 	submitData: PropTypes.func,
+	toTitleCase: PropTypes.func
 }
 
 export default GameFields;
