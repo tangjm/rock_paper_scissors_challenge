@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
+
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import WelcomePage from './Components/WelcomePage';
 import GameFields from './Components/GameFields';

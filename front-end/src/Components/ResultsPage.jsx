@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
+import Stack from 'react-bootstrap/Stack';
 
 const ResultsPage = ({ gameResult, setGameResult, setRenderGameFields, setPlayerTurn, setPlayer1Name, setPlayer2Name, toTitleCase }) => {
 	const pageContent = () => {
@@ -19,11 +21,30 @@ const ResultsPage = ({ gameResult, setGameResult, setRenderGameFields, setPlayer
 	}
 
 	return (
-		<>
+		<div>
 			{pageContent()}
-			<input variant="primary" type="submit" name="playAgain" value="Play Again" onClick={gameFinishedHandler} />
-			<input type="submit" name="newPlayers" value="New Players?" onClick={gameFinishedHandler} />
-		</>
+			&nbsp;
+			<Stack direction="horizontal" gap={3}>
+				<Button
+					as="input"
+					type="submit"
+					value="Play Again!"
+					variant="primary"
+					name="playAgain"
+					size="lg"
+					onClick={gameFinishedHandler}
+				/>
+				<Button
+					as="input"
+					type="submit"
+					value="New Game?"
+					variant="warning"
+					name="newPlayers"
+					size="lg"
+					onClick={gameFinishedHandler}
+				/>
+			</Stack>
+		</div>
 	)
 }
 
