@@ -30,16 +30,18 @@ class RPSextended extends RPS {
 	determineWinner(a, b) {
 		const aChoice = this.options.indexOf(a.getChoice()) + 1;
 		const bChoice = this.options.indexOf(b.getChoice()) + 1;
-
+		// Modular division with negative integers is abnormal in javascript
+		// e.g. -3 mod 5 = 2 yet -3 % 5 === -3
+		// If x is negative, mod(x, y) needs to be mod(mod(x, y) + y), y) to give the correct answer
+		// Calculation for determining if x wins: 
+		// mod(mod(x - y, 5), 2)) === 1
 		if (aChoice === bChoice) {
 			return "draw";
-		} else if (aChoice < bChoice && ((aChoice - bChoice) % 5) % 2 === 1) {
-			return a.name;
-		} else if (aChoice > bChoice && (aChoice - bChoice) % 2 === 1) {
-			return a.name;
-		} else {
-			return b.name;
 		}
+		if (((((aChoice - bChoice) % 5) + 5) % 5) % 2 === 1) {
+			return a.name;
+		}
+		return b.name;
 	}
 }
 

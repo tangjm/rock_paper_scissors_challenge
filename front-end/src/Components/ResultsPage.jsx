@@ -9,10 +9,11 @@ const ResultsPage = ({ gameResult, setGameResult, setRenderGameFields }) => {
 	}
 
 	const gameFinishedHandler = event => {
-		if (event.target.name === "newPlayer") {
+		if (event.target.name === "newPlayers") {
 			setRenderGameFields(false);
 		}
 		setGameResult({});
+		// Reset player names
 	}
 
 	return (
@@ -21,7 +22,7 @@ const ResultsPage = ({ gameResult, setGameResult, setRenderGameFields }) => {
 
 			<input type="submit" name="playAgain" value="Play Again" onClick={gameFinishedHandler} />
 
-			<input type="submit" name="newPlayer" value="New Player?" onClick={gameFinishedHandler} />
+			<input type="submit" name="newPlayers" value="New Players?" onClick={gameFinishedHandler} />
 		</>
 	)
 }

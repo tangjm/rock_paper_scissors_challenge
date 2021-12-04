@@ -7,6 +7,7 @@ router.route(`/`)
 		if (req.body) {
 
 			const { player, choice } = req.body;
+			console.log(req.body);
 			// let game = req.app.get("game");
 
 			// let players = game.getPlayers();
@@ -16,6 +17,15 @@ router.route(`/`)
 			// 	}
 			// }
 
+			// Do the following  in the RPSextended class
+			//check whether the player has registered,
+			// if so, update their choice;
+			// if not, error?
+
+			// Do the following in the express route
+			// check whether that player is the second/last player,
+			// if so, redirect to /results
+			// if not, send a response object verifying their selection
 			let game = req.app.locals.game;
 			let players = game.getPlayers();
 			for (let i = 0; i < players.length; i++) {

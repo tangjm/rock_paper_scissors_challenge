@@ -10,11 +10,11 @@ class RPS {
 	}
 
 	determineWinner(a, b) {
-		aChoice = this.options.indexOf(a.choice);
-		bChoice = this.options.indexOf(b.choice);
+		const aChoice = this.options.indexOf(a.choice);
+		const bChoice = this.options.indexOf(b.choice);
 
 		if (aChoice === bChoice) return "draw";
-		else if ((aChoice + 1) % 3 === bchoice) return a.name;
+		else if ((aChoice + 1) % 3 === bChoice) return a.name;
 		else return b.name;
 	}
 }
