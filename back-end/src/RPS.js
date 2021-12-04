@@ -1,5 +1,10 @@
 class RPS {
 	constructor() {
+		this.options = [];
+		this.setOptions();
+	}
+
+	setOptions() {
 		this.options = ["rock", "paper", "scissors"];
 	}
 
