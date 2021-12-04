@@ -134,15 +134,14 @@ describe(`Tests for 'updatePlayerChoice' method`, () => {
 	})
 })
 
-
-xdescribe(`Test suite for 'determineWinner' method`, () => {
+describe(`Test suite for 'determineWinner' method`, () => {
 	let testGame;
-	let testPlayer1 = "testPlayer1";
-	let testPlayer2 = "testPlayer2";
+	let testPlayer1;
+	let testPlayer2;
 	beforeEach(() => {
 		testGame = new RPSextended();
-		testPlayer1 = "testPlayer1";
-		testPlayer2 = "testPlayer2";
+		testPlayer1 = new MockPlayer("testPlayer1");
+		testPlayer2 = new MockPlayer("testPlayer2");
 	})
 	afterEach(() => {
 		testGame = null;
@@ -151,9 +150,9 @@ xdescribe(`Test suite for 'determineWinner' method`, () => {
 	})
 
 	test(`it should return "draw" if both players select the same choice`, () => {
-		testGame.players = [
-			{ name: testPlayer1, choice: "rock" },
-			{ name: testPlayer2, choice: "rock" }];
+		testPlayer1.setChoice("rock");
+		testPlayer2.setChoice("rock");
+		testGame.players = [testPlayer1, testPlayer2];
 		const result = testGame.determineWinner(testGame.players[0], testGame.players[1]);
 
 		expect(result).toBe("draw");
