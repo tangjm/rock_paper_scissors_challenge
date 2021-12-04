@@ -2,61 +2,46 @@ import PropTypes from 'prop-types';
 
 const GameFields = ({ playerName, submitData }) => {
 
-	const optionsTitle = "Rock, Paper or Scissors?";
-	const gameOptions = ["rock", "paper", "scissors", "spock", "lizard"];
+	const formatTitle = gameOptionsArr => {
+		let formattedTitle = "";
+		gameOptionsArr = gameOptionsArr.map(gameOption => toTitleCase(gameOption));
+		for (let i = 0; i < gameOptionsArr.length; i++) {
+			(i !== gameOptionsArr.length - 1) ? formattedTitle += `, ${gameOptionsArr[i]}` :
+				formattedTitle += ` or ${gameOptionsArr[i]}?`;
+		}
+		return formattedTitle.slice(1);
+	}
 
-	const submitChoicesHandler = event => {
+	const submitChoiceHandler = event => {
 		event.preventDefault();
 		const chosenOption = document.querySelector("input[name='options']:checked").value;
 		submitData(playerName, chosenOption);
 	}
 
-	return (
-		<form onSubmit={submitChoicesHandler}>
-			<h3>{playerName}'s turn to play</h3>
-			<h3>{optionsTitle}</h3>
-			<div display="flex" flex-direction="column">
-				<label htmlFor={gameOptions[0]}>{gameOptions[0]}</label>
-				<input
-					type="radio"
-					id={gameOptions[0]}
-					name="options"
-					value={gameOptions[0]}
-					required
-				/>
-				<label htmlFor={gameOptions[1]}>{gameOptions[1]}</label>
-				<input
-					type="radio"
-					id={gameOptions[1]}
-					name="options"
-					value={gameOptions[1]}
-					required
-				/>
-				<label htmlFor={gameOptions[2]}>{gameOptions[2]}</label>
-				<input
-					type="radio"
-					id={gameOptions[2]}
-					name="options"
-					value={gameOptions[2]}
-					required
-				/>
-				<label htmlFor={gameOptions[3]}>{gameOptions[3]}</label>
-				<input
-					type="radio"
-					id={gameOptions[3]}
-					name="options"
-					value={gameOptions[3]}
-					required
-				/>
-				<label htmlFor={gameOptions[4]}>{gameOptions[4]}</label>
-				<input
-					type="radio"
-					id={gameOptions[4]}
-					name="options"
-					value={gameOptions[4]}
-					required
-				/>
+	const toTitleCase = string => {
+		return string[0].toUpperCase().concat(string.slice(1));
+	}
+
+	const populateGameOptions = gameOptions => {
+		return gameOptions.map((gameOption, index) => {
+			gameOption = toTitleCase(gameOption);
+			return <div key={index}>
+				<label htmlFor={gameOption}>{gameOption}</label>
+				<input type="radio" id={gameOption} name="options"
+					value={gameOption.toLowerCase()} required />
+				&nbsp;&nbsp;&nbsp;
 			</div>
+		})
+	}
+
+	const gameOptions = ["rock", "paper", "scissors", "spock", "lizard"];
+	const optionsTitle = formatTitle(gameOptions);
+
+	return (
+		<form onSubmit={submitChoiceHandler}>
+			<h1>{toTitleCase(playerName)}'s turn to play</h1>
+			<p>{optionsTitle}</p>
+			{populateGameOptions(gameOptions)}
 			<input type="submit" className="App-link" value="Submit" />
 		</form>
 	)
@@ -66,4 +51,5 @@ GameFields.propTypes = {
 	playerName: PropTypes.string,
 	submitData: PropTypes.func,
 }
+
 export default GameFields;
