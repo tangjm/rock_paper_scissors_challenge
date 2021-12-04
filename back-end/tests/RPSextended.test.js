@@ -135,26 +135,64 @@ describe(`Tests for 'updatePlayerChoice' method`, () => {
 })
 
 describe(`Test suite for 'determineWinner' method`, () => {
-	let testGame;
-	let testPlayer1;
-	let testPlayer2;
-	beforeEach(() => {
-		testGame = new RPSextended();
-		testPlayer1 = new MockPlayer("testPlayer1");
-		testPlayer2 = new MockPlayer("testPlayer2");
-	})
-	afterEach(() => {
-		testGame = null;
-		testPlayer1 = null;
-		testPlayer2 = null;
-	})
+	describe(`Tests for draws`, () => {
+		let testGame;
+		let testPlayer1;
+		let testPlayer2;
+		beforeEach(() => {
+			testGame = new RPSextended();
+			testPlayer1 = new MockPlayer("testPlayer1");
+			testPlayer2 = new MockPlayer("testPlayer2");
+		})
+		afterEach(() => {
+			testGame = null;
+			testPlayer1 = null;
+			testPlayer2 = null;
+		})
 
-	test(`it should return "draw" if both players select the same choice`, () => {
-		testPlayer1.setChoice("rock");
-		testPlayer2.setChoice("rock");
-		testGame.players = [testPlayer1, testPlayer2];
-		const result = testGame.determineWinner(testGame.players[0], testGame.players[1]);
+		test(`it should return "draw" if both players select "rock"`, () => {
+			testPlayer1.setChoice("rock");
+			testPlayer2.setChoice("rock");
+			testGame.players = [testPlayer1, testPlayer2];
+			const result = testGame.determineWinner(testGame.players[0], testGame.players[1]);
 
-		expect(result).toBe("draw");
+			expect(result).toBe("draw");
+		})
+
+		test(`it should return "draw" if both players select "paper"`, () => {
+			testPlayer1.setChoice("paper");
+			testPlayer2.setChoice("paper");
+			testGame.players = [testPlayer1, testPlayer2];
+			const result = testGame.determineWinner(testGame.players[0], testGame.players[1]);
+
+			expect(result).toBe("draw");
+		})
+
+		test(`it should return "draw" if both players select "scissors"`, () => {
+			testPlayer1.setChoice("scissors");
+			testPlayer2.setChoice("scissors");
+			testGame.players = [testPlayer1, testPlayer2];
+			const result = testGame.determineWinner(testGame.players[0], testGame.players[1]);
+
+			expect(result).toBe("draw");
+		})
+
+		test(`it should return "draw" if both players select "spock"`, () => {
+			testPlayer1.setChoice("spock");
+			testPlayer2.setChoice("spock");
+			testGame.players = [testPlayer1, testPlayer2];
+			const result = testGame.determineWinner(testGame.players[0], testGame.players[1]);
+
+			expect(result).toBe("draw");
+		})
+
+		test(`it should return "draw" if both players select "lizard"`, () => {
+			testPlayer1.setChoice("lizard");
+			testPlayer2.setChoice("lizard");
+			testGame.players = [testPlayer1, testPlayer2];
+			const result = testGame.determineWinner(testGame.players[0], testGame.players[1]);
+
+			expect(result).toBe("draw");
+		})
 	})
 })
