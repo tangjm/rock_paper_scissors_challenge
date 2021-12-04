@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+
 const registrationRouter = require('./routes/registration');
 const gameRouter = require('./routes/game');
 const resultsRouter = require('./routes/results');
@@ -12,7 +13,6 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
 
 app.use(`/`, registrationRouter);
 app.use(`/game`, gameRouter);

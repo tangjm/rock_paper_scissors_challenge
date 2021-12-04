@@ -11,6 +11,10 @@ class Player {
 	getChoice() {
 		return this.choice;
 	}
+
+	getName() {
+		return this.name;
+	}
 }
 
 module.exports = Player;

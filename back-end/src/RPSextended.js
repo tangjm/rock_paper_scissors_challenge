@@ -18,13 +18,19 @@ class RPSextended extends RPS {
 	getPlayers() {
 		return this.players;
 	}
-
+	// Do the following  in the RPSextended class
+	//check whether the player has registered,
+	// if so, update their choice;
+	// if not, error?
 	updatePlayerChoice(player, choice) {
-		const index = this.players.indexOf(player);
-		const playerArr = this.getPlayers();
-		const playerToEdit = playerArr[index];
-		playerToEdit.setChoice(choice);
-		return playerToEdit.getChoice();
+		let registered = this.players.some(registeredPlayer => registeredPlayer.getName() === player);
+		if (registered) {
+			this.players.forEach(currentPlayer => {
+				if (currentPlayer.getName() === player) {
+					currentPlayer.setChoice(choice);
+				}
+			})
+		}
 	}
 
 	determineWinner(a, b) {
