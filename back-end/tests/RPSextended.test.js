@@ -1,10 +1,26 @@
 const RPSextended = require('../src/RPSextended');
-const Player = require('../src/Player');
 
 // jest.spyOn(Player, 'getName', 'get').mockImplme
-// class MockPlayer {
+// jest.mock('../src/Player', () => {
+// 	return 
+// })
+class MockPlayer {
+	constructor(name) {
+		this.name = name;
+	}
 
-// }
+	setChoice(choice) {
+		this.choice = choice;
+	}
+
+	getChoice() {
+		return this.choice;
+	}
+
+	getName() {
+		return this.name;
+	}
+}
 
 describe(`Test suite for RPSextended class`, () => {
 	describe(`Tests for constructor`, () => {
@@ -62,11 +78,64 @@ describe(`Test suite for RPSextended class`, () => {
 	})
 })
 
+describe(`Tests for 'isRegistered' method`, () => {
+	let testGame;
+	beforeEach(() => {
+		testGame = new RPSextended();
+	})
+	afterEach(() => {
+		testGame = null;
+	})
+	test(`it should return true if player is registered`, () => {
+		const testPlayer = "testPlayer";
+		testGame.players = [new MockPlayer(testPlayer)];
+		const actualValue = testGame.isRegistered(testPlayer);
+		expect(actualValue).toBe(true);
+	})
+
+	test(`it should return false if player is not registered`, () => {
+		const testPlayer = "testPlayer";
+		const testPlayer2 = "testPlayer2";
+		testGame.players = [new MockPlayer(testPlayer2)];
+		const actualValue = testGame.isRegistered(testPlayer);
+		expect(actualValue).toBe(false);
+	})
+})
+
+describe(`Tests for 'updatePlayerChoice' method`, () => {
+	let testGame;
+	beforeEach(() => {
+		testGame = new RPSextended();
+	})
+	afterEach(() => {
+		testGame = null;
+	})
+	test(`it should add a choice property to the existing Player if they are registered`, () => {
+		const testPlayer = "testPlayer";
+		const testChoice = "rock";
+		testGame.players = [new MockPlayer(testPlayer)];
+
+		testGame.updatePlayerChoice(testPlayer, testChoice);
+		const actualValue = testGame.players[0];
+
+		expect(actualValue).toHaveProperty("choice", testChoice);
+	})
+
+	test(`it should do nothing if player is not registered`, () => {
+		const testPlayer = "testPlayer";
+		const testPlayer2 = "testPlayer2";
+		const testChoice = "rock";
+		testGame.players = [new MockPlayer(testPlayer2)];
+
+		testGame.updatePlayerChoice(testPlayer, testChoice);
+		const actualValue = testGame.players[0];
+
+		expect(actualValue).not.toHaveProperty("choice");
+	})
+})
 
 
-// jest.spyOn()
-
-describe(`Test suite for 'determineWinner' method`, () => {
+xdescribe(`Test suite for 'determineWinner' method`, () => {
 	let testGame;
 	let testPlayer1 = "testPlayer1";
 	let testPlayer2 = "testPlayer2";
