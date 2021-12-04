@@ -2,7 +2,7 @@ const Player = require('../src/Player');
 
 describe(`Test suite for Player class`, () => {
 
-	test(`it instantiates with a name property`, () => {
+	test(`it should have a name property when its constructor is called`, () => {
 		const testName = "testPlayer";
 		const testPlayer = new Player(testName);
 		expect(testPlayer.getName()).toBe(testName);
