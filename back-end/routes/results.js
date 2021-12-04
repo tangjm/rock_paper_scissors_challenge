@@ -5,13 +5,10 @@ const router = express.Router();
 router.route(`/`)
 	.post((req, res) => {
 		let game = req.app.locals.game;
-		let players = game.getPlayers();
-		console.log(players);
+		let player1 = game.getPlayers()[0];
+		let player2 = game.getPlayers()[1];
 
-		const result = game.determineWinner(players[0], players[1]);
-
-		console.log(result);
-		// Must we clear data stored in req.app.locals?
+		const result = game.determineWinner(player1, player2);
 
 		res.status(200).json({ result });
 	})
