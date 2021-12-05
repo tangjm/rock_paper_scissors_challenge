@@ -2,14 +2,17 @@ import React from 'react'
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 
-const SelectGameMode = ({ sendGameMode, setRenderGameModes }) => {
+const SelectGameMode = ({ sendGameMode, setRenderGameModes, setSinglePlayer }) => {
 	const clickHandler = event => {
 		if (event.target.id === "singlePlayer") {
+			setSinglePlayer(true);
 			sendGameMode("singlePlayer");
 		} else {
+			setSinglePlayer(false);
 			sendGameMode("multiplayer");
 		}
 		setRenderGameModes(false);
+
 	}
 	return (
 		<div>
@@ -27,5 +30,6 @@ const SelectGameMode = ({ sendGameMode, setRenderGameModes }) => {
 SelectGameMode.propTypes = {
 	sendGameMode: PropTypes.func,
 	setRenderGameModes: PropTypes.func,
+	setSinglePlayer: PropTypes.func,
 }
 export default SelectGameMode;

@@ -34,13 +34,11 @@ function App() {
     }
   };
 
-  const submitPlayerNames = async (player1Name, player2Name) => {
+  const submitPlayerNames = async playerNamesObj => {
     try {
-      const res = await axios.post(`${nodeServer}/`, {
-        player1Name,
-        player2Name
-      });
+      const res = await axios.post(`${nodeServer}/registration`, { ...playerNamesObj });
       if (res.data) {
+        console.dir(res.data);
         setRenderGameFields(true);
       }
     } catch (err) {
