@@ -27,7 +27,7 @@ class RPS {
 
 	computerChooses() {
 		const optionMax = this.options.length;
-		const randomNum = Math.round(Math.random() * optionMax);
+		const randomNum = Math.floor(Math.random() * optionMax);
 		const cpuChoice = this.options[randomNum];
 		return { name: "CPU", choice: cpuChoice };
 	}
