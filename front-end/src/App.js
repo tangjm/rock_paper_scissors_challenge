@@ -9,6 +9,7 @@ import GameFields from './Components/GameFields';
 import ResultsPage from './Components/ResultsPage';
 
 function App() {
+  const [gameType, setGameType] = useState("normal");
   const [singlePlayer, setSinglePlayer] = useState(false);
   const [playerTurn, setPlayerTurn] = useState(0);
   const [player1Name, setPlayer1Name] = useState(``);
@@ -25,7 +26,6 @@ function App() {
         { player: playerName, choice: chosenOption }
       );
       if (res.data && singlePlayer) {
-        console.log(res.data.result);
         return setGameResult(res.data);
       }
       if (res.data && playerTurn) {
@@ -43,7 +43,6 @@ function App() {
     try {
       const res = await axios.post(`${nodeServer}/registration`, { ...playerNamesObj });
       if (res.data) {
-        console.dir(res.data);
         setRenderGameFields(true);
       }
     } catch (err) {
@@ -62,8 +61,11 @@ function App() {
 
   const sendGameType = async gameType => {
     try {
-      await axios.post(`${nodeServer}/gameType`, { gameType });
-
+      const res = await axios.post(`${nodeServer}/gameType`, { gameType });
+      if (res.data?.gameType) {
+        console.log(res.data.gameType);
+        setGameType(res.data.gameType);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -85,7 +87,7 @@ function App() {
               setPlayer1Name={setPlayer1Name}
               setPlayer2Name={setPlayer2Name}
               toTitleCase={toTitleCase} /> :
-            <GameFields playerName={!playerTurn ? player1Name : player2Name} submitData={submitData} toTitleCase={toTitleCase} />
+            <GameFields playerName={!playerTurn ? player1Name : player2Name} submitData={submitData} toTitleCase={toTitleCase} gameType={gameType} />
         }
       </div >
     )

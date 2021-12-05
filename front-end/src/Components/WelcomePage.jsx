@@ -11,8 +11,8 @@ import FormControl from 'react-bootstrap/FormControl';
 
 const WelcomePage = ({ player1Name, player2Name, setPlayer1Name, setPlayer2Name, submitPlayerNames, sendGameMode, sendGameType, singlePlayer, setSinglePlayer }) => {
 
-	const [renderGameModes, setRenderGameModes] = useState(true);
 	const [renderGameTypes, setRenderGameTypes] = useState(true);
+	const [renderGameModes, setRenderGameModes] = useState(true);
 
 	const nameField = "Please register below";
 	const handleSubmitName = event => {

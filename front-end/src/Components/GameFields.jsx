@@ -4,7 +4,7 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Button from 'react-bootstrap/Button';
 
-const GameFields = ({ playerName, submitData, toTitleCase }) => {
+const GameFields = ({ playerName, submitData, toTitleCase, gameType }) => {
 	const [radioValue, setRadioValue] = useState(``);
 
 	const formatTitle = gameOptionsArr => {
@@ -19,7 +19,6 @@ const GameFields = ({ playerName, submitData, toTitleCase }) => {
 
 	const submitChoiceHandler = event => {
 		event.preventDefault();
-		// const chosenOption = document.querySelector("input[name='options']:checked").value;
 		const chosenOption = radioValue;
 		if (chosenOption) {
 
@@ -39,30 +38,17 @@ const GameFields = ({ playerName, submitData, toTitleCase }) => {
 			);
 		})
 	}
-	// const populateGameOptions = gameOptions => {
-	// 	return gameOptions.map((gameOption, index) => {
-	// 		gameOption = toTitleCase(gameOption);
-	// 		return <div key={index}>
-	// 			<label htmlFor={gameOption}>{gameOption}</label>
-	// 			<input type="radio" id={gameOption} name="options"
-	// 				value={gameOption.toLowerCase()} required />
-	// 			&nbsp;&nbsp;&nbsp;
-	// 		</div>
-	// 	})
-	// }
 
-	const gameOptions = ["rock", "paper", "scissors", "spock", "lizard"];
+	const gameOptions = (gameType === "normal") ? ["rock", "paper", "scissors"] : ["rock", "paper", "scissors", "spock", "lizard"];
 	const optionsTitle = formatTitle(gameOptions);
 
 	return (
 		<form onSubmit={submitChoiceHandler}>
 			<h1>{toTitleCase(playerName)}'s turn to play</h1>
 			<p>{optionsTitle}</p>
-			{/* {populateGameOptions(gameOptions)} */}
 			<ToggleButtonGroup name="options" onChange={value => setRadioValue(value)} >
 				{populateGameOptions(gameOptions)}
 			</ToggleButtonGroup>
-			{/* <input type="submit" className="App-link" value="Submit" /> */}
 			&nbsp;&nbsp;
 			<Button as="input" type="submit" value="Submit"
 				variant="primary" size="lg" />
@@ -73,7 +59,8 @@ const GameFields = ({ playerName, submitData, toTitleCase }) => {
 GameFields.propTypes = {
 	playerName: PropTypes.string,
 	submitData: PropTypes.func,
-	toTitleCase: PropTypes.func
+	toTitleCase: PropTypes.func,
+	gameType: PropTypes.string,
 }
 
 export default GameFields;
