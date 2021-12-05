@@ -9,6 +9,7 @@ import GameFields from './Components/GameFields';
 import ResultsPage from './Components/ResultsPage';
 
 function App() {
+  const [singlePlayer, setSinglePlayer] = useState(false);
   const [playerTurn, setPlayerTurn] = useState(0);
   const [player1Name, setPlayer1Name] = useState(``);
   const [player2Name, setPlayer2Name] = useState(``);
@@ -23,6 +24,10 @@ function App() {
         `${nodeServer}/game`,
         { player: playerName, choice: chosenOption }
       );
+      if (res.data && singlePlayer) {
+        console.log(res.data.result);
+        return setGameResult(res.data);
+      }
       if (res.data && playerTurn) {
         setGameResult(res.data);
       }
@@ -94,7 +99,9 @@ function App() {
         setPlayer2Name={setPlayer2Name}
         submitPlayerNames={submitPlayerNames}
         sendGameMode={sendGameMode}
-        sendGameType={sendGameType} />
+        sendGameType={sendGameType}
+        singlePlayer={singlePlayer}
+        setSinglePlayer={setSinglePlayer} />
     </div >
   );
 }

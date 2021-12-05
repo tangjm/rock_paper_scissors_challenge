@@ -4,6 +4,7 @@ import Stack from 'react-bootstrap/Stack';
 
 const ResultsPage = ({ gameResult, setGameResult, setRenderGameFields, setPlayerTurn, setPlayer1Name, setPlayer2Name, toTitleCase }) => {
 	const pageContent = () => {
+		console.log(typeof gameResult)
 		if (gameResult === "draw") {
 			return <h1>Not bad, a draw!</h1>
 		}

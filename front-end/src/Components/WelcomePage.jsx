@@ -9,8 +9,8 @@ import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 
-const WelcomePage = ({ player1Name, player2Name, setPlayer1Name, setPlayer2Name, submitPlayerNames, sendGameMode, sendGameType }) => {
-	const [singlePlayer, setSinglePlayer] = useState(false);
+const WelcomePage = ({ player1Name, player2Name, setPlayer1Name, setPlayer2Name, submitPlayerNames, sendGameMode, sendGameType, singlePlayer, setSinglePlayer }) => {
+
 	const [renderGameModes, setRenderGameModes] = useState(true);
 	const [renderGameTypes, setRenderGameTypes] = useState(true);
 
@@ -77,6 +77,8 @@ WelcomePage.propTypes = {
 	sendGameType: PropTypes.func,
 	setRenderGameModes: PropTypes.func,
 	setRenderGameTypes: PropTypes.func,
+	singlePlayer: PropTypes.bool,
+	setSinglePlayer: PropTypes.func,
 }
 
 export default WelcomePage;
