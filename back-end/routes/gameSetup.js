@@ -6,8 +6,13 @@ router.route(`/`)
 	.post((req, res) => {
 		if (req.body?.playerCount) {
 			res.status(200);
-			req.body.playerCount ? res.json({ gameMode: "singlePlayer" }) :
+			return req.body.playerCount ? res.json({ gameMode: "singlePlayer" }) :
 				res.json({ gameMode: "multiplayer" });
+		}
+
+		if (req.body?.gameType) {
+			res.status(200);
+			return req.body.gameType === "normal" ? res.json({ gameType: "normal" }) : res.json({ gameType: "special" });
 		}
 	})
 
