@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.route(`/`)
 	.post((req, res) => {
-		if (req.body?.playerCount) {
+		if (req.body?.gameMode) {
 			return res.redirect(307, '/gameMode');
 		}
 
@@ -17,7 +17,7 @@ router.route(`/gameMode`)
 	.post((req, res) => {
 		res.status(200);
 		return (
-			req.body.playerCount ? res.json({ gameMode: "singlePlayer" }) :
+			req.body.gameMode === "singlePlayer" ? res.json({ gameMode: "singlePlayer" }) :
 				res.json({ gameMode: "multiplayer" })
 		);
 	});

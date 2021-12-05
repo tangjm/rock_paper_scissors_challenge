@@ -10,9 +10,9 @@ router.route(`/`)
 		let playerCount = game.getPlayers().length;
 		res.status(200);
 		if (playerCount === 1) {
-			return res.redirect(307, '/singlePlayer');
+			return res.redirect(307, '/results/singlePlayer');
 		}
-		return res.redirect(307, '/multiplayer');
+		return res.redirect(307, '/results/multiplayer');
 	})
 
 router.route(`/multiplayer`)
