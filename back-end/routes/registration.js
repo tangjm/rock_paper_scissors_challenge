@@ -24,9 +24,9 @@ router.route(`/`)
 router.route(`/singlePlayer`)
 	.post((req, res) => {
 		const { player1Name } = req.body;
-		const rpsGame = new RPS();
-		rpsGame.registerPlayers(player1Name);
-		req.app.locals.game = rpsGame;
+
+		let game = req.app.locals.game;
+		game.registerPlayers(player1Name);
 
 		return res.status(200).json("Sucessfully registered player");
 	})
@@ -34,9 +34,9 @@ router.route(`/singlePlayer`)
 router.route(`/multiplayer`)
 	.post((req, res) => {
 		const { player1Name, player2Name } = req.body;
-		const rpsGame = new RPSextended();
-		rpsGame.registerPlayers(player1Name, player2Name);
-		req.app.locals.game = rpsGame;
+
+		let game = req.app.locals.game;
+		game.registerPlayers(player1Name, player2Name);
 
 		return res.status(200).json("Sucessfully registered players");
 	})

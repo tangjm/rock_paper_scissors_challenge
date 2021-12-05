@@ -1,5 +1,6 @@
 const express = require('express');
-
+const RPS = require('../src/RPS');
+const RPSextended = require('../src/RPSextended');
 const router = express.Router();
 
 router.route(`/`)
@@ -17,18 +18,23 @@ router.route(`/gameMode`)
 	.post((req, res) => {
 		res.status(200);
 		return (
-			req.body.gameMode === "singlePlayer" ? res.json({ gameMode: "singlePlayer" }) :
-				res.json({ gameMode: "multiplayer" })
+			req.body.gameType === "normal" ? res.json({ gameType: "normal" })
+				: res.json({ gameType: "special" })
 		);
 	});
 
 router.route(`/gameType`)
 	.post((req, res) => {
 		res.status(200);
-		return (
-			req.body.gameType === "normal" ? res.json({ gameType: "normal" })
-				: res.json({ gameType: "special" })
-		);
+		if (req.body.gameType === "normal") {
+			req.app.locals.game = new RPS();
+			return res.json({ gameType: "normal" });
+		}
+
+		if (req.body.gameType === "special") {
+			req.app.locals.game = new RPSextended();
+			return res.json({ gameType: "special" });
+		}
 	})
 
 module.exports = router;

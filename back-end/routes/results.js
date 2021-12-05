@@ -18,10 +18,10 @@ router.route(`/`)
 router.route(`/singlePlayer`)
 	.post((req, res) => {
 		let game = req.app.locals.game;
-
+		console.log(game)
 		let user = game.getPlayers()[0];
 
-		console.log("user:")
+		console.log("USER:")
 		console.log(user.getChoice());
 
 		let cpuData = game.computerChooses();
@@ -29,7 +29,7 @@ router.route(`/singlePlayer`)
 		cpu.setChoice(cpuData.choice);
 
 
-		console.log("cpu")
+		console.log("CPU:")
 		console.log(cpu.getChoice());
 
 		const result = game.determineWinner(user, cpu);
