@@ -1,6 +1,12 @@
+const Player = require('./Player.js');
+
 class RPS {
 	constructor() {
 		this.options = ["rock", "paper", "scissors"];
+	}
+
+	registerPlayers(...players) {
+		this.players = [...players].map(player => new Player(player));
 	}
 
 	computerChooses() {

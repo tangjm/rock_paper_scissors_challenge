@@ -1,5 +1,4 @@
-const Player = require('./Player.js');
-const RPS = require('./RPS');
+// const Player = require('./Player.js');
 
 class RPSextended extends RPS {
 	constructor() {
@@ -13,10 +12,6 @@ class RPSextended extends RPS {
 
 	getPlayers() {
 		return this.players;
-	}
-
-	registerPlayers(...players) {
-		this.players = [...players].map(player => new Player(player));
 	}
 
 	isRegistered(player) {
