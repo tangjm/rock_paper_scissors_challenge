@@ -1,9 +1,18 @@
+import axios from 'axios';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
+
+import SelectGameMode from './SelectGameMode';
+import SelectGameType from './SelectGameType';
+
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 
-const WelcomePage = ({ player1Name, player2Name, setPlayer1Name, setPlayer2Name, submitPlayerNames }) => {
+const WelcomePage = ({ player1Name, player2Name, setPlayer1Name, setPlayer2Name, submitPlayerNames, sendGameMode, sendGameType }) => {
+
+	const [renderGameModes, setRenderGameModes] = useState(true);
+	const [renderGameTypes, setRenderGameTypes] = useState(true);
 
 	const nameField = "Please register your names";
 	const handleSubmitName = event => {
@@ -11,6 +20,12 @@ const WelcomePage = ({ player1Name, player2Name, setPlayer1Name, setPlayer2Name,
 		submitPlayerNames(player1Name, player2Name);
 	}
 
+	if (renderGameTypes) {
+		return <SelectGameType sendGameType={sendGameType} setRenderGameTypes={setRenderGameTypes} />
+	}
+	if (renderGameModes) {
+		return <SelectGameMode sendGameMode={sendGameMode} setRenderGameModes={setRenderGameModes} />
+	}
 	return (
 		<>
 			<h1>Welcome!</h1>
@@ -51,6 +66,10 @@ WelcomePage.propTypes = {
 	setPlayer1Name: PropTypes.func,
 	setPlayer2Name: PropTypes.func,
 	submitPlayerName: PropTypes.func,
+	sendGameMode: PropTypes.func,
+	sendGameType: PropTypes.func,
+	setRenderGameModes: PropTypes.func,
+	setRenderGameTypes: PropTypes.func,
 }
 
 export default WelcomePage;

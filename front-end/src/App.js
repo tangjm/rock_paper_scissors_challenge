@@ -48,6 +48,24 @@ function App() {
     }
   };
 
+
+  const sendGameMode = async gameMode => {
+    try {
+      await axios.post(`${nodeServer}/gameMode`, { gameMode });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const sendGameType = async gameType => {
+    try {
+      await axios.post(`${nodeServer}/gameType`, { gameType });
+
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   const toTitleCase = string => {
     return string[0].toUpperCase().concat(string.slice(1));
   }
@@ -76,7 +94,9 @@ function App() {
         player2Name={player2Name}
         setPlayer1Name={setPlayer1Name}
         setPlayer2Name={setPlayer2Name}
-        submitPlayerNames={submitPlayerNames} />
+        submitPlayerNames={submitPlayerNames}
+        sendGameMode={sendGameMode}
+        sendGameType={sendGameType} />
     </div >
   );
 }
