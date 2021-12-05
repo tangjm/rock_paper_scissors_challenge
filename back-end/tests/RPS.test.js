@@ -71,6 +71,58 @@ describe(`Test suite for RPS`, () => {
 	})
 })
 
+describe(`Test suite for 'computerChooses' method`, () => {
+	test(`it should return an object with two keys`, () => {
+		const game = new RPS();
+
+		const testObj = game.computerChooses();
+		const actual = Object.keys(testObj);
+		const expected = 2;
+
+		expect(actual).toHaveLength(expected);
+	})
+
+	test(`it should return an object with a name property`, () => {
+		const game = new RPS();
+
+		const testObj = game.computerChooses();
+		const actual = Object.keys(testObj);
+		const expected = "name";
+
+		expect(actual).toContain(expected);
+	})
+
+	test(`it should return an object with a choice property`, () => {
+		const game = new RPS();
+
+		const testObj = game.computerChooses();
+		const actual = Object.keys(testObj);
+		const expected = "choice";
+
+		expect(actual).toContain(expected);
+	})
+
+	test(`it should return an object with a name property of "CPU"`, () => {
+		const game = new RPS();
+
+		const testObj = game.computerChooses();
+		const actual = testObj.name;
+		const expected = "CPU";
+
+		expect(actual).toBe(expected);
+	})
+
+	test(`it should return an object with a choice property of either "rock", "paper" or "scissors"`, () => {
+		const game = new RPS();
+
+		const testObj = game.computerChooses();
+		const actual = testObj.choice;
+		const expected = game.options;
+
+		expect(expected).toContain(actual);
+	})
+})
+
 describe(`Test suite for 'determineWinner' method`, () => {
 	describe(`Tests for draws`, () => {
 		let testGame;
