@@ -1,6 +1,6 @@
-const express = require('express');
 const RPS = require('../src/RPS');
 const RPSextended = require('../src/RPSextended');
+const express = require('express');
 const router = express.Router();
 
 router.route(`/gameMode`)

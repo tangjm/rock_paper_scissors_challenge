@@ -10,7 +10,9 @@ class RPS {
 	}
 
 	isRegistered(player) {
-		return this.players.some(registeredPlayer => registeredPlayer.getName() === player);
+		return this.players.some(registeredPlayer => {
+			return registeredPlayer.getName() === player;
+		});
 	}
 
 	updatePlayerChoice(player, choice) {

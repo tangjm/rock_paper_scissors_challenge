@@ -1,8 +1,7 @@
-const express = require('express');
 const Player = require('../src/Player');
 
+const express = require('express');
 const router = express.Router();
-
 
 router.route(`/`)
 	.post((req, res) => {
@@ -18,19 +17,11 @@ router.route(`/`)
 router.route(`/singlePlayer`)
 	.post((req, res) => {
 		let game = req.app.locals.game;
-		console.log(game)
 		let user = game.getPlayers()[0];
-
-		console.log("USER:")
-		console.log(user.getChoice());
 
 		let cpuData = game.computerChooses();
 		let cpu = new Player(cpuData.name);
 		cpu.setChoice(cpuData.choice);
-
-
-		console.log("CPU:")
-		console.log(cpu.getChoice());
 
 		const result = game.determineWinner(user, cpu);
 
@@ -40,7 +31,6 @@ router.route(`/singlePlayer`)
 router.route(`/multiplayer`)
 	.post((req, res) => {
 		let game = req.app.locals.game;
-
 		let player1 = game.getPlayers()[0];
 		let player2 = game.getPlayers()[1];
 

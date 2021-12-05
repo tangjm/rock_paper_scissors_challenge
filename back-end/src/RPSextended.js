@@ -1,4 +1,3 @@
-// const Player = require('./Player.js');
 const RPS = require('./RPS');
 
 class RPSextended extends RPS {

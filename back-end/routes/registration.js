@@ -1,17 +1,11 @@
 const express = require('express');
-const RPS = require('../src/RPS');
-const RPSextended = require('../src/RPSextended');
 
 const router = express.Router();
 
 router.route(`/`)
 	.post((req, res) => {
 		if (req.body) {
-			//if req.body contains a single key
-			// then, redirect to th
-
 			const singlePlayerGame = Object.keys(req.body).length === 1;
-
 			if (singlePlayerGame) {
 				return res.redirect(307, '/registration/singlePlayer');
 			} else {
