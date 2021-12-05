@@ -32,9 +32,3 @@ router.route(`/gameType`)
 	})
 
 module.exports = router;
-
-// router.route(`/singlePlayer`)
-// 	// select either normal or special game mode
-// 	.post((req, res) => {
-// 		res.json()
-// 	})
