@@ -19,7 +19,7 @@ function App() {
 
   const nodeServer = process.env.REACT_APP_NODE_SERVER;
 
-  const submitData = async (playerName, chosenOption) => {
+  const submitPlayerChoice = async (playerName, chosenOption) => {
     try {
       const res = await axios.post(
         `${nodeServer}/game`,
@@ -50,12 +50,11 @@ function App() {
     }
   };
 
-
   const sendGameMode = async gameMode => {
     try {
       await axios.post(`${nodeServer}/gameMode`, { gameMode });
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -63,11 +62,10 @@ function App() {
     try {
       const res = await axios.post(`${nodeServer}/gameType`, { gameType });
       if (res.data?.gameType) {
-        console.log(res.data.gameType);
         setGameType(res.data.gameType);
       }
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -87,7 +85,9 @@ function App() {
               setPlayer1Name={setPlayer1Name}
               setPlayer2Name={setPlayer2Name}
               toTitleCase={toTitleCase} /> :
-            <GameFields playerName={!playerTurn ? player1Name : player2Name} submitData={submitData} toTitleCase={toTitleCase} gameType={gameType} />
+            <GameFields playerName={!playerTurn ? player1Name : player2Name}
+              submitPlayerChoice={submitPlayerChoice} toTitleCase={toTitleCase}
+              gameType={gameType} />
         }
       </div >
     )

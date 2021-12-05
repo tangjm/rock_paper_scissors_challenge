@@ -1,6 +1,6 @@
-import React from 'react'
-import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
+import Stack from 'react-bootstrap/Stack';
 
 const SelectGameMode = ({ sendGameMode, setRenderGameModes, setSinglePlayer }) => {
 	const clickHandler = event => {
@@ -12,17 +12,19 @@ const SelectGameMode = ({ sendGameMode, setRenderGameModes, setSinglePlayer }) =
 			sendGameMode("multiplayer");
 		}
 		setRenderGameModes(false);
-
 	}
 	return (
 		<div>
-			<h1>Single Player or Multiplayer?</h1>
-			<Button as="input" type="submit" id="singlePlayer" value="Single Player"
-				variant="primary" size="lg"
-				onClick={clickHandler} />
-			<Button as="input" type="submit" id="multiplayer" value="Multiplayer"
-				variant="primary" size="lg"
-				onClick={clickHandler} />
+			<h1>Select Game Mode</h1>
+			&nbsp;
+			<Stack direction="vertical" gap={3}>
+				<Button as="input" type="submit" id="singlePlayer"
+					value="Single Player" variant="success" size="lg"
+					onClick={clickHandler} />
+				<Button as="input" type="submit" id="multiplayer"
+					value="Multiplayer" variant="danger" size="lg"
+					onClick={clickHandler} />
+			</Stack>
 		</div>
 	)
 }

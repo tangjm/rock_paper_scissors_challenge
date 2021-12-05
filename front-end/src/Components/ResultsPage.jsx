@@ -3,8 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 
 const ResultsPage = ({ gameResult, setGameResult, setRenderGameFields, setPlayerTurn, setPlayer1Name, setPlayer2Name, toTitleCase }) => {
-	const pageContent = () => {
-		console.log(typeof gameResult)
+	const displayResults = () => {
 		if (gameResult === "draw") {
 			return <h1>Not bad, a draw!</h1>
 		}
@@ -23,14 +22,14 @@ const ResultsPage = ({ gameResult, setGameResult, setRenderGameFields, setPlayer
 
 	return (
 		<div>
-			{pageContent()}
+			{displayResults()}
 			&nbsp;
 			<Stack direction="horizontal" gap={3}>
 				<Button
 					as="input"
 					type="submit"
 					value="Play Again!"
-					variant="primary"
+					variant="success"
 					name="playAgain"
 					size="lg"
 					onClick={gameFinishedHandler}
