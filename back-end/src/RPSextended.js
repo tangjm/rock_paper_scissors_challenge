@@ -10,22 +10,6 @@ class RPSextended extends RPS {
 		this.options.push("spock", "lizard");
 	}
 
-	getPlayers() {
-		return this.players;
-	}
-
-	isRegistered(player) {
-		return this.players.some(registeredPlayer => registeredPlayer.getName() === player);
-	}
-
-	updatePlayerChoice(player, choice) {
-		this.players.forEach(currentPlayer => {
-			if (currentPlayer.getName() === player) {
-				currentPlayer.setChoice(choice);
-			}
-		})
-	}
-
 	determineWinner(a, b) {
 		const aChoice = this.options.indexOf(a.getChoice()) + 1;
 		const bChoice = this.options.indexOf(b.getChoice()) + 1;
