@@ -15,6 +15,28 @@ router.route(`/`)
 		return res.redirect(307, '/results/multiplayer');
 	})
 
+router.route(`/singlePlayer`)
+	.post((req, res) => {
+		let game = req.app.locals.game;
+
+		let user = game.getPlayers()[0];
+
+		console.log("user:")
+		console.log(user.getChoice());
+
+		let cpuData = game.computerChooses();
+		let cpu = new Player(cpuData.name);
+		cpu.setChoice(cpuData.choice);
+
+
+		console.log("cpu")
+		console.log(cpu.getChoice());
+
+		const result = game.determineWinner(user, cpu);
+
+		res.status(200).json({ result });
+	})
+
 router.route(`/multiplayer`)
 	.post((req, res) => {
 		let game = req.app.locals.game;
@@ -27,19 +49,5 @@ router.route(`/multiplayer`)
 		res.status(200).json({ result });
 	})
 
-router.route(`/singlePlayer`)
-	.post((req, res) => {
-		let game = req.app.locals.game;
-
-		let user = game.getPlayer()[0];
-
-		let cpuData = game.computerChooses();
-		let cpu = new Player(cpuData.name);
-		cpu.setChoice(cpu.choice);
-
-		const result = game.determineWinner(user, cpu);
-
-		res.status(200).json({ result });
-	})
 
 module.exports = router;

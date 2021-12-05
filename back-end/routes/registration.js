@@ -13,9 +13,9 @@ router.route(`/`)
 			const singlePlayerGame = Object.keys(req.body).length === 1;
 
 			if (singlePlayerGame) {
-				return res.redirect(307, '/registration/singlePlayer')
+				return res.redirect(307, '/registration/singlePlayer');
 			} else {
-				return res.redirect(307, '/registration/multiplayer')
+				return res.redirect(307, '/registration/multiplayer');
 			}
 		}
 		return res.status(404).send("Failed to register player(s)");
@@ -23,9 +23,9 @@ router.route(`/`)
 
 router.route(`/singlePlayer`)
 	.post((req, res) => {
-		const { playerName } = req.body;
+		const { player1Name } = req.body;
 		const rpsGame = new RPS();
-		rpsGame.registerPlayers(playerName);
+		rpsGame.registerPlayers(player1Name);
 		req.app.locals.game = rpsGame;
 
 		return res.status(200).json("Sucessfully registered player");

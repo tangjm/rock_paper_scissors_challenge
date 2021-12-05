@@ -5,9 +5,17 @@ router.route(`/`)
 	.post((req, res) => {
 		if (req.body) {
 			const { player, choice } = req.body;
-			console.log(req.body);
+
+			// console.log(`gameRoute: req.body: `);
+			// console.log(req.body)
+
 			let game = req.app.locals.game;
-			console.log(game);
+
+			// console.log(`gameRoute: app.locals: `);
+			// console.log(req.app.locals);
+			// console.log(`gameRoute: game: `);
+			// console.log(game);
+
 			let players = game.getPlayers();
 
 			if (game.isRegistered(player)) {

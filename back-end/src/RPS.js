@@ -26,8 +26,9 @@ class RPS {
 	}
 
 	computerChooses() {
-		const randomNum = Math.round(Math.random() * 2);
-		const cpuChoice = options[randomNum];
+		const optionMax = this.options.length;
+		const randomNum = Math.round(Math.random() * optionMax);
+		const cpuChoice = this.options[randomNum];
 		return { name: "CPU", choice: cpuChoice };
 	}
 
@@ -36,7 +37,7 @@ class RPS {
 		const bChoice = this.options.indexOf(b.getChoice());
 
 		if (aChoice === bChoice) return "draw";
-		else if ((aChoice + 1) % 3 === bChoice) return a.getName();
+		else if (aChoice === (bChoice + 1) % 3) return a.getName();
 		else return b.getName();
 	}
 }
